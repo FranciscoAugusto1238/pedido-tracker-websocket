@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Entregador - Acompanhamento do Pedido</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Status do Pedido (Entregador)</h1>
+    <p id="status">Aguardando status...</p>
+    <button id="proximo">Avançar Status</button>
+    <button id="devolver">Devolver Pedido</button>
+  </div>
+
+  <script>
+    const socket = new WebSocket("ws://localhost:3000");
+    const statusEl = document.getElementById("status");
+    const proximoBtn = document.getElementById("proximo");
+    const devolverBtn = document.getElementById("devolver");
+
+    const statusList = [
+      "Pedido recebido",
+      "Em preparação",
+      "Saiu para entrega",
+      "Entregador a 5 minutos de você",
+      "Entregue"
+    ];
+    let index = 0;
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.tipo === "status") {
+        statusEl.textContent = "Status: " + data.valor;
+      }
+    };
+
+    proximoBtn.onclick = () => {
+      if (index < statusList.length) {
+        socket.send(JSON.stringify({ tipo: "status", valor: statusList[index] }));
+        index++;
+      }
+    };
+
+    devolverBtn.onclick = () => {
+      socket.send(JSON.stringify({ tipo: "status", valor: "Pedido devolvido pelo entregador" }));
+    };
+  </script>
+</body>
+</html>

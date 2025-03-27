@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cliente - Acompanhamento do Pedido</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Status do Pedido (Cliente)</h1>
+    <p id="status">Aguardando status...</p>
+    <button id="cancelar">Cancelar Pedido</button>
+  </div>
+
+  <script>
+    const socket = new WebSocket("ws://localhost:3000");
+    const statusEl = document.getElementById("status");
+    const cancelarBtn = document.getElementById("cancelar");
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.tipo === "status") {
+        statusEl.textContent = "Status: " + data.valor;
+      }
+    };
+
+    cancelarBtn.onclick = () => {
+      socket.send(JSON.stringify({ tipo: "cancelar" }));
+    };
+  </script>
+</body>
+</html>
