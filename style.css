@@ -1,28 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
 .container {
-  max-width: 400px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-button {
-  margin-top: 10px;
-  padding: 10px;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   width: 100%;
-  font-size: 16px;
-  border: none;
-  background-color: #007BFF;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
+  max-width: 500px;
+  text-align: center;
 }
+
+h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  color: white;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
 button:hover {
   background-color: #0056b3;
+}
+
+#cancelar {
+  background-color: #FF6347;
+}
+
+#cancelar:hover {
+  background-color: #d9534f;
+}
+
+#proximo {
+  background-color: #28a745;
+}
+
+#proximo:hover {
+  background-color: #218838;
+}
+
+#devolver {
+  background-color: #ffc107;
+}
+
+#devolver:hover {
+  background-color: #e0a800;
 }
